@@ -44,6 +44,10 @@ dev_dependencies:
   # flashy_tab_bar: ^0.0.3
   animate_do: ^2.0.0
   flutter_verification_code: ^1.1.0
+  flutter_bloc: ^2.1.1
+  font_awesome_flutter: ^9.2.0
+
+
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -81,8 +85,17 @@ flutter:
     - assets/images/player_third.png
     - assets/images/player_four.png
     - assets/images/players.png
+    - assets/images/equipes/barca.png
+    - assets/images/equipes/bayern.png
+    - assets/images/equipes/france.png
+    - assets/images/equipes/lyon.png
+    - assets/images/equipes/marseille.png
     - assets/images/icons/icon_email.png
+    - assets/images/icons/icon_request.png
+    - assets/images/icons/icon_started.png
     - assets/images/icons/icon_gmail.png
+    - assets/images/icons/icon_date.png
+    - assets/images/icons/icon_map.png
     - assets/images/icons/icon_flash.png
     - assets/images/icons/icon_password.png
 

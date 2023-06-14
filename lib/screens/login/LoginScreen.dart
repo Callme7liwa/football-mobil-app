@@ -10,7 +10,7 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen>  {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               SizedBox(height: 30,),
+              //Start Header
               Container(
                 width: double.infinity,
                 height: 100,
@@ -65,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: 20,),
+              // Inputs .
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -87,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 10,),
                     CupertinoTextField(
-                      style: TextStyle(color: Colors.black , fontFamily: "Cairo" , fontSize: 13),
+                      style: TextStyle(color: Colors.black , fontFamily: "Nunito" , fontSize: 13),
                       placeholder: 'Ayoubseddiki132@gmail.com',
                       placeholderStyle: TextStyle(color: Color.fromRGBO(
                           103, 103, 103, 0.7333333333333333) , fontSize: 13),
@@ -113,8 +115,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 10,),
                     CupertinoTextField(
-                      style: TextStyle(color: Colors.black , fontFamily: "Cairo" , fontSize: 13),
-                      placeholder: 'Ayoubseddiki132@gmail.com',
+                      style: TextStyle(color: Colors.black , fontFamily: "Nunito" , fontSize: 13),
+                      placeholder: '*******',
                       placeholderStyle: TextStyle(color: Color.fromRGBO(
                           103, 103, 103, 0.7333333333333333) , fontSize: 13),
                       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 15),
@@ -129,6 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
+              //End Header
               SizedBox(height: 20,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -229,12 +232,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 10,),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("You Don't have an account yet ? "),
-                  Text("Register here",style: TextStyle(color : MyAppColors.blueSecondColor),),
+                  Text("You Don't have an account yet ? ".toUpperCase(),style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                  Text("Register here".toUpperCase(),style: TextStyle(color : MyAppColors.blueSecondColor , fontFamily: "Cairo",fontWeight:FontWeight.bold,fontSize: 11),),
                 ],
-              )
+              ),
+              SizedBox(height: 10,),
+              Image(image: AssetImage("assets/images/ball.png") , width: 20,height: 20,)
             ],
           ),
         ),

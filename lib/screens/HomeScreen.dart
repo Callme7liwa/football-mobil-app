@@ -6,7 +6,7 @@ import 'package:my_flutter_application/utils/MyAppTextSize.dart';
 import 'package:my_flutter_application/utils/MyAppBoxShadow.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen(Key? key) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

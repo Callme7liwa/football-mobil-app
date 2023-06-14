@@ -4,7 +4,7 @@ import 'package:my_flutter_application/utils/MyAppColors.dart';
 
 class WelcomScreenSecond extends StatelessWidget {
 
-  const WelcomScreenSecond({Key? key}) : super(key: key);
+  const WelcomScreenSecond(Key? key) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

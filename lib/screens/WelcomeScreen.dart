@@ -14,6 +14,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: MyAppColors.greenColor,
       body: Container(

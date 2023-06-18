@@ -25,6 +25,12 @@ class MyAppBoxShadow {
                                             blurRadius: 0,
                                             spreadRadius: 1,
                                           );
+  static final BoxShadow boxShadowFive = BoxShadow(
+                                          color: Color.fromRGBO(17, 17, 26, 0.1),
+                                          offset: Offset(0, 1),
+                                          blurRadius: 0,
+                                        );
+
 
 
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -72,7 +73,7 @@ class _TeamProfileState extends State<TeamProfile> with SingleTickerProviderStat
 
   Future<void> setDominantColor() async {
     Color? extractedColor = await FunctionUtils.extractDominantColor(
-        "assets/images/equipes/bayern.png");
+        "assets/images/equipes/barca.png");
     setState(() {
       dominantColor = extractedColor ?? MyAppColors.blueSecondColor;
     });
@@ -160,7 +161,7 @@ class _TeamProfileState extends State<TeamProfile> with SingleTickerProviderStat
                             children: [
                               Image(
                                   image: AssetImage(
-                                      "assets/images/equipes/bayern.png"),
+                                      "assets/images/equipes/barca.png"),
                                   width: 150,
                                   height: 150),
                               Text(
@@ -624,7 +625,33 @@ class _TeamProfileState extends State<TeamProfile> with SingleTickerProviderStat
             makeItemInfoTeam(
               "assets/images/icons/icon_goal.png",
               "Goals",
-              "22",
+              "2",
+            ),
+            makeItemInfoTeam(
+              "assets/images/icons/icon_soccer_ball.png",
+              "Assists",
+              "1",
+            ),
+            makeItemInfoTeam(
+              "assets/images/icons/icon_draw.png",
+              "Contre goals",
+              "1",
+            ),
+            makeTitle("Player statistics"),
+            makeItemInfoTeam(
+              "assets/images/icons/icon_top_soccer.png",
+              "Top Soccer ",
+              "Ayoub Sghir",
+            ),
+            makeItemInfoTeam(
+              "assets/images/icons/icon_soccer_ball.png",
+              "Top Assister",
+              "Finida",
+            ),
+            makeItemInfoTeam(
+              "assets/images/icons/icon_rebound_leader.png",
+              "rebound leader",
+              "Ahmed Aouinti",
             ),
           ],
         ),

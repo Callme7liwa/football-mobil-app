@@ -65,6 +65,14 @@ flutter:
     - assets/images/equipes/marseille.png
     - assets/images/equipes/background/bayern.jpg
     - assets/images/players/neymar.jpg
+    - assets/images/players/ronaldo.jpg
+    - assets/images/players/benzema.jpg
+    - assets/images/players/ziyech.jpg
+    - assets/images/icons/icon_last_update.png
+    - assets/images/icons/icon_request_second.png
+    - assets/images/icons/icon_offer.png
+    - assets/images/icons/icon_information.png
+    - assets/images/icons/icon_information_second.png
     - assets/images/icons/icon_position_player.png
     - assets/images/icons/icon_position.png
     - assets/images/icons/icon_number.png

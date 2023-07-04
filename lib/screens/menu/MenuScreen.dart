@@ -16,14 +16,43 @@ class HorizontalItem {
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({Key? key}) : super(key: key);
-
-
-
   @override
   State<MenuScreen> createState() => _MenuScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class _MenuScreenState extends State<MenuScreen>  with SingleTickerProviderStateMixin {
+
+  late AnimationController _animationController;
+  int currentScreenState = 1;
+  var width ;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void switchScreen() {
+    setState(() {
+      currentScreenState = (currentScreenState == 0) ? 1 : 0;
+      if (currentScreenState == 0) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
+    });
+  }
+
+
 
   List<HorizontalItem> itemList = [
     HorizontalItem("assets/images/icons/icon_flash.png", 'Matches day'),
@@ -43,6 +72,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
     return  Scaffold(
       backgroundColor: MyAppColors.backgroundColor,
       body: SafeArea(
@@ -69,35 +99,14 @@ class _MenuScreenState extends State<MenuScreen> {
                           child: makeHorizontalList(),
                         ),
                         SizedBox(height: 10),
-                        renderTeams(),
-                        SizedBox(height: 5,),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 20,
-                                height: 20,
-                                child: Image(image: AssetImage("assets/images/ball.png") ,),
-                              ),
-                              Expanded(
-                                  child: Container(
-                                    height: 1,
-                                    color: Color.fromRGBO(
-                                        93, 93, 93, 0.13137254901960784),
-                                  )
-                              ),
-                              Container(
-                                width: 20,
-                                height: 20,
-                                child: Image(image: AssetImage("assets/images/ball.png") ,),
-                              ),
-                            ],
-                          ),
-                        ),
-                        makeSuggestionPart()
+                        AnimatedSwitcher(
+                          duration: Duration(milliseconds: 500), // Set the transition duration
+                          child: currentScreenState == 0
+                              ? renderTeams() // First child widget
+                              : currentScreenState == 1
+                              ? renderOffers()
+                              : renderRequests(),// Second child widget
+                        )
                       ],
                     ),
                   ),
@@ -105,9 +114,6 @@ class _MenuScreenState extends State<MenuScreen> {
               ),
             ],
           ),
-
-
-
         ),
       ),
     );
@@ -203,26 +209,32 @@ class _MenuScreenState extends State<MenuScreen> {
       itemCount: itemList.length,
       itemBuilder: (BuildContext context, int index) {
         HorizontalItem item = itemList[index];
-
-        return Container(
-          width: 150,
-          padding: EdgeInsets.symmetric(vertical: 15,horizontal: 15),
-          margin: EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: index == 0 ? MyAppColors.blueSecondColor : Colors.white ,
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [MyAppBoxShadow.boxShadowSecond]
+        return GestureDetector(
+          onTap: (){
+            setState(() {
+              currentScreenState = index  ;
+            });
+          },
+          child: Container(
+            width: 150,
+            padding: EdgeInsets.symmetric(vertical: 15,horizontal: 15),
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: currentScreenState == index ? MyAppColors.blueSecondColor : Colors.white ,
+              borderRadius: BorderRadius.circular(30),
+              boxShadow: index == currentScreenState ? [  MyAppBoxShadow.boxShadow] : [  MyAppBoxShadow.boxShadowSecond]
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(image: AssetImage(item.imagePath) ,width: 20,height: 20,),
+                SizedBox(width: 5,),
+                Text(item.name.toUpperCase() , style: TextStyle(
+                    color: index == currentScreenState ? MyAppColors.backgroundColor : Colors.black ,
+                    fontFamily: "Cairo" , fontWeight: FontWeight.bold),)
+              ],
+            )
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image(image: AssetImage(item.imagePath) ,width: 20,height: 20,),
-              SizedBox(width: 5,),
-              Text(item.name.toUpperCase() , style: TextStyle(
-                  color: index == 0 ? MyAppColors.backgroundColor : Colors.black ,
-                  fontFamily: "Cairo" , fontWeight: FontWeight.bold),)
-            ],
-          )
         );
       },
     );
@@ -231,19 +243,54 @@ class _MenuScreenState extends State<MenuScreen> {
 
   Widget renderTeams()
   {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 500),
+      child: Column(
         children: [
-          for (int i = 0; i < teams.length  ; i += 2)
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
               children: [
-                makeCardGame(),
-                if (i + 1 < teams.length)
-                  makeCardGame(),
+                for (int i = 0; i < teams.length  ; i += 2)
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      makeCardGame(),
+                      if (i + 1 < teams.length)
+                        makeCardGame(),
+                    ],
+                  ),
               ],
             ),
+          ),
+          SizedBox(height: 5,),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 20,
+                  height: 20,
+                  child: Image(image: AssetImage("assets/images/ball.png") ,),
+                ),
+                Expanded(
+                    child: Container(
+                      height: 1,
+                      color: Color.fromRGBO(
+                          93, 93, 93, 0.13137254901960784),
+                    )
+                ),
+                Container(
+                  width: 20,
+                  height: 20,
+                  child: Image(image: AssetImage("assets/images/ball.png") ,),
+                ),
+              ],
+            ),
+          ),
+          makeSuggestionPart()
         ],
       ),
     );
@@ -429,12 +476,300 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                   child: Text("Follow" , style: TextStyle(color: MyAppColors.blueSecondColor , fontWeight: FontWeight.bold , fontSize: 13 , fontFamily: "Cairo"),),
                 )
-
               ],
             ),
 
-          )
+          ),
       ],
+    );
+  }
+
+  Widget renderOffers()
+  {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 10 , horizontal: 15),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [MyAppBoxShadow.boxShadowSecond]
+          ),
+          child: Column(
+            children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children : [
+                    Row(
+                      children : [
+                        Container(
+                            width: 40,
+                            height: 40,
+                            padding: EdgeInsets.all(7),
+                            decoration: BoxDecoration(
+                                color: MyAppColors.backgroundColor,
+                                borderRadius: BorderRadius.circular(50),
+                                boxShadow: [ MyAppBoxShadow.boxShadowSecond],
+                                border: Border.all(color: Color.fromRGBO(
+                                    1, 1, 1, 0.0596078431372549) , width: 1)
+                            ),
+                            child : Image(image: AssetImage("assets/images/equipes/barca.png"),)
+                        ),
+                        SizedBox(width: 10,),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children : [
+                              Text("Barcelona".toUpperCase() , style: TextStyle(color : Colors.black45 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                              SizedBox(height: 5,),
+                              Text("MT , AT ".toUpperCase() , style: TextStyle(color : Colors.black87 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                            ]
+                        )
+                      ]
+                    ),
+                    GestureDetector(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
+                        decoration : BoxDecoration(
+                          color: Color.fromRGBO(1, 1, 1, 0.8431372549019608),
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [MyAppBoxShadow.boxShadowThird]
+                        ),
+                        child: Text("Submit".toUpperCase() , style: TextStyle(color: Colors.white , fontSize: 10 , fontWeight: FontWeight.bold),),
+                      ),
+                    )
+                  ]
+                ),
+            ],
+          ),
+        ),
+        SizedBox(height: 10,),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 10 , horizontal: 15),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+            boxShadow: [MyAppBoxShadow.boxShadowSecond]
+          ),
+          child: Column(
+            children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children : [
+                    Row(
+                      children : [
+                        Container(
+                            width: 40,
+                            height: 40,
+                            padding: EdgeInsets.all(7),
+                            decoration: BoxDecoration(
+                                color: MyAppColors.backgroundColor,
+                                borderRadius: BorderRadius.circular(50),
+                                boxShadow: [ MyAppBoxShadow.boxShadowSecond],
+                                border: Border.all(color: Color.fromRGBO(
+                                    1, 1, 1, 0.0596078431372549) , width: 1)
+                            ),
+                            child : Image(image: AssetImage("assets/images/equipes/barca.png"),)
+                        ),
+                        SizedBox(width: 10,),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children : [
+                              Text("Barcelona".toUpperCase() , style: TextStyle(color : Colors.black45 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                              SizedBox(height: 5,),
+                              Text("MT , AT ".toUpperCase() , style: TextStyle(color : Colors.black87 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                            ]
+                        )
+                      ]
+                    ),
+                    GestureDetector(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
+                        decoration : BoxDecoration(
+                          color: Color.fromRGBO(1, 1, 1, 0.8431372549019608),
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [MyAppBoxShadow.boxShadowThird]
+                        ),
+                        child: Text("Submit".toUpperCase() , style: TextStyle(color: Colors.white , fontSize: 10 , fontWeight: FontWeight.bold),),
+                      ),
+                    )
+                  ]
+                ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget renderRequests()
+  {
+    double cardWidth;
+
+    if (width >= 800) {
+      // For tablet or larger screens
+      cardWidth= width * 0.25;
+    } else {
+      // For phones or smaller screens
+      cardWidth = width * 0.45;
+    }
+
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 500),
+      child: Wrap(
+        spacing: 5,
+        runSpacing : 5,
+        children : [
+          Container(
+            width: cardWidth,
+            padding: EdgeInsets.symmetric(vertical: 10 , horizontal: 15),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [MyAppBoxShadow.boxShadowSecond]
+            ),
+            child: Column(
+              children: [
+                Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [ MyAppBoxShadow.boxShadowSecond],
+                        border: Border.all(color: MyAppColors.blueSecondColor , width: 1),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/players/avatar.png"),
+                            fit: BoxFit.contain
+                        ),
+                        color: MyAppColors.backgroundColor
+                    ),
+                ),
+                SizedBox(height: 10,),
+                Text("El mehdi seddiki".toUpperCase() , style: TextStyle(color : Colors.black45 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                Divider(
+                  thickness: 1,
+                  indent : cardWidth * 0.2 ,
+                  endIndent: cardWidth*0.2,
+                  color: Color.fromRGBO(1, 1, 1, 0.7019607843137255),
+                ),
+                Text("MT , AT ".toUpperCase() , style: TextStyle(color : Colors.black87 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                SizedBox(height: 10,),
+                GestureDetector(
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
+                    decoration : BoxDecoration(
+                        color: Color.fromRGBO(1, 1, 1, 0.8431372549019608),
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [MyAppBoxShadow.boxShadowThird]
+                    ),
+                    child: Center(child: Text("Submit".toUpperCase() , style: TextStyle(color: Colors.white , fontSize: 10 , fontWeight: FontWeight.bold),)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: cardWidth,
+            padding: EdgeInsets.symmetric(vertical: 10 , horizontal: 15),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [MyAppBoxShadow.boxShadowSecond]
+            ),
+            child: Column(
+              children: [
+                Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [ MyAppBoxShadow.boxShadowSecond],
+                        border: Border.all(color: MyAppColors.blueSecondColor , width: 1),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/players/avatar.png"),
+                            fit: BoxFit.contain
+                        ),
+                        color: MyAppColors.backgroundColor
+                    ),
+                ),
+                SizedBox(height: 10,),
+                Text("El mehdi seddiki".toUpperCase() , style: TextStyle(color : Colors.black45 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                Divider(
+                  thickness: 1,
+                  indent : cardWidth * 0.2 ,
+                  endIndent: cardWidth*0.2,
+                  color: Color.fromRGBO(1, 1, 1, 0.7019607843137255),
+                ),
+                Text("MT , AT ".toUpperCase() , style: TextStyle(color : Colors.black87 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                SizedBox(height: 10,),
+                GestureDetector(
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
+                    decoration : BoxDecoration(
+                        color: Color.fromRGBO(1, 1, 1, 0.8431372549019608),
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [MyAppBoxShadow.boxShadowThird]
+                    ),
+                    child: Center(child: Text("Submit".toUpperCase() , style: TextStyle(color: Colors.white , fontSize: 10 , fontWeight: FontWeight.bold),)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: cardWidth,
+            padding: EdgeInsets.symmetric(vertical: 10 , horizontal: 15),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [MyAppBoxShadow.boxShadowSecond]
+            ),
+            child: Column(
+              children: [
+                Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [ MyAppBoxShadow.boxShadowSecond],
+                        border: Border.all(color: MyAppColors.blueSecondColor , width: 1),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/players/avatar.png"),
+                            fit: BoxFit.contain
+                        ),
+                        color: MyAppColors.backgroundColor
+                    ),
+                ),
+                SizedBox(height: 10,),
+                Text("El mehdi seddiki".toUpperCase() , style: TextStyle(color : Colors.black45 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                Divider(
+                  thickness: 1,
+                  indent : cardWidth * 0.2 ,
+                  endIndent: cardWidth*0.2,
+                  color: Color.fromRGBO(1, 1, 1, 0.7019607843137255),
+                ),
+                Text("MT , AT ".toUpperCase() , style: TextStyle(color : Colors.black87 , fontWeight: FontWeight.bold , fontSize: 11,letterSpacing: 0.5),),
+                SizedBox(height: 10,),
+                GestureDetector(
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 15 , vertical: 10),
+                    decoration : BoxDecoration(
+                        color: Color.fromRGBO(1, 1, 1, 0.8431372549019608),
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [MyAppBoxShadow.boxShadowThird],
+                    ),
+                    child: Center(
+                        child: Text("More".toUpperCase() , style: TextStyle(color: Colors.white , fontSize: 10 , fontWeight: FontWeight.bold),)
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ]
+      ),
     );
   }
 }

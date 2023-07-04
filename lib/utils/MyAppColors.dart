@@ -15,6 +15,7 @@ class MyAppColors {
   static const Color blueSecondColor = Color(0xFF2a41cb);
   static const Color blueLightColor = Color(0xFF4942E4);
   static const Color blueLightSecondColor = Color(0xFF0B00CB);
+  static const Color whiteCardColor = Color.fromRGBO(245, 245, 245, 0.9490196078431372);
 
 // Ajoutez d'autres couleurs selon vos besoins
 }

@@ -67,8 +67,6 @@ class _ProfileState extends State<Profile> {
                               ),
                             ),
                           ),
-
-
                           Row(children: [
                             SafeArea(
                               child: Padding(

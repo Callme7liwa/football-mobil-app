@@ -16,6 +16,9 @@ dependencies:
   palette_generator: ^0.3.3+2
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.0.0
+  get: 4.6.1
+  multi_select_flutter: ^4.1.2
+  lorem_ipsum: any
 
 
 
@@ -58,6 +61,7 @@ flutter:
     - assets/images/player_third.png
     - assets/images/player_four.png
     - assets/images/players.png
+    - assets/images/zellije_bg.jpg
     - assets/images/equipes/barca.png
     - assets/images/equipes/bayern.png
     - assets/images/equipes/france.png
@@ -68,6 +72,10 @@ flutter:
     - assets/images/players/ronaldo.jpg
     - assets/images/players/benzema.jpg
     - assets/images/players/ziyech.jpg
+    - assets/images/players/avatar.png
+    - assets/images/icons/icon_key.png
+    - assets/images/icons/icon_status.png
+    - assets/images/icons/icon_username.png
     - assets/images/icons/icon_last_update.png
     - assets/images/icons/icon_request_second.png
     - assets/images/icons/icon_offer.png

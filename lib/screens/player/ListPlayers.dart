@@ -32,7 +32,6 @@ class _ListPlayersState extends State<ListPlayers> with SingleTickerProviderStat
   var width, height;
   var popUpIsShowing = false;
   String selectedCities = "";
-  String testString = "hello ";
   var filteredPlayers = [];
 
   void searchPlayers(String query) {
@@ -320,7 +319,6 @@ class _ListPlayersState extends State<ListPlayers> with SingleTickerProviderStat
                                     image: AssetImage(player.imagePath),
                                     fit: BoxFit.cover,
                                   ),
-                                  boxShadow: [MyAppBoxShadow.boxShadow],
                                 ),
                               ),
                               SizedBox(

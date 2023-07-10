@@ -1391,7 +1391,8 @@ class _ProfilePlayerState extends State<ProfilePlayer> {
                   width: cardWidth,
                   padding: EdgeInsets.all(15),
                   decoration : BoxDecoration(
-                    color: Colors.white,
+                    color: MyAppColors.whiteCardColor,
+                    border: Border.all(color : Colors.white),
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [MyAppBoxShadow.boxShadowSecond]
                   ),

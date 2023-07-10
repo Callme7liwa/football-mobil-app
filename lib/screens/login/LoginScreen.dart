@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen>  {
                           103, 103, 103, 0.7333333333333333) , fontSize: 13),
                       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 15),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: MyAppColors.whiteCardColor,
                         borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           MyAppBoxShadow.boxShadowSecond
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen>  {
                           103, 103, 103, 0.7333333333333333) , fontSize: 13),
                       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 15),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: MyAppColors.whiteCardColor,
                         borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           MyAppBoxShadow.boxShadowSecond

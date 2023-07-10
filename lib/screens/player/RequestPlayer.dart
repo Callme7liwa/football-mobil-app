@@ -86,8 +86,8 @@ class _RequestPlayerState extends State<RequestPlayer> {
   Widget makeCardRequest(bool state ,String date , String submitionsNumber  ) {
 
     final Color  stateColor = state
-                              ? Color.fromRGBO(72, 183, 13, 1.0)
-                              : Color.fromRGBO(175, 5, 5, 1.0);
+                              ? MyAppColors.greenSecondColor
+                              : MyAppColors.redSecondColor;
     final String textStatus = state ? "Opened" : "Closed";
     DateTime dateTime = DateTime.parse(date);
 
@@ -111,7 +111,6 @@ class _RequestPlayerState extends State<RequestPlayer> {
               Image.asset("assets/images/icons/icon_status.png" , width: 20,),
               SizedBox(width: 5,),
               Text("status".toUpperCase() , style: TextStyle(color : Colors.black , fontSize: 11 , fontFamily: "Cairo" , fontWeight: FontWeight.bold),),
-
             ],
           ),
           Expanded(child: Container(

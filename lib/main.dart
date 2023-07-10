@@ -9,6 +9,7 @@ import 'package:my_flutter_application/screens/menu/MenuScreen.dart';
 import 'package:my_flutter_application/screens/player/EditProfil.dart';
 import 'package:my_flutter_application/screens/player/ListPlayers.dart';
 import 'package:my_flutter_application/screens/player/Profile.dart';
+import 'package:my_flutter_application/screens/player/RequestDetails.dart';
 import 'package:my_flutter_application/screens/player/RequestPlayer.dart';
 import 'package:my_flutter_application/screens/player/ProfilePlayer.dart';
 import 'package:my_flutter_application/screens/registration/OtpScreen.dart';
@@ -17,7 +18,7 @@ import 'package:my_flutter_application/screens/team/TeamProfile.dart';
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: ThemeData(fontFamily: 'Montserrat'),
-    home: ListPlayers(),
+    home: LoginScreen(),
 ));
 
 

@@ -38,8 +38,4 @@ class MyAppBoxShadow {
                                           blurRadius: 29,
                                           spreadRadius: 0,
                                         );
-
-
-
-
 }

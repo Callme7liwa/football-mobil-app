@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_application/utils/MyAppColors.dart';
 
-import '../utils/MyAppBoxShadow.dart';
+import '../../../../../StudioProjects/Deliver_Ease/lib/utils/MyAppBoxShadow.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_application/utils/MyAppBoxShadow.dart';
+import '../../../../../StudioProjects/Deliver_Ease/lib/utils/MyAppBoxShadow.dart';
 import 'package:my_flutter_application/utils/MyAppColors.dart';
 
 class WelcomScreenSecond extends StatelessWidget {
@@ -69,19 +69,6 @@ class WelcomScreenSecond extends StatelessWidget {
                   )
                 ],
               ),
-              /*Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Continue".toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold,color: MyAppColors.blackColor),),
-                    CircleAvatar(
-                      backgroundColor: MyAppColors.blackColor,
-                      child: Icon(Icons.chevron_right , color: MyAppColors.greenColor,),
-                    ),
-                  ],
-                ),
-              ),*/
               SizedBox(height: 20,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),

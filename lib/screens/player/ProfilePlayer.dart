@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:my_flutter_application/utils/FunctionsUtils.dart';
-import 'package:my_flutter_application/utils/MyAppBoxShadow.dart';
+import '../../../../../../StudioProjects/Deliver_Ease/lib/utils/MyAppBoxShadow.dart';
 import 'package:my_flutter_application/utils/MyAppColors.dart';
 import 'package:my_flutter_application/utils/MyAppLinearGradient.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
@@ -20,8 +20,8 @@ class _ProfilePlayerState extends State<ProfilePlayer> {
   int currentIndex = 0;
   int stateData = 2;
   var screenWidth, screenHeight;
-  Color dominantColor = MyAppColors.blueSecondColor;
   PageController _pageController = PageController(initialPage: 0);
+  Color dominantColor = MyAppColors.blueSecondColor;
 
   Future<void> setDominantColor() async {
     Color? extractedColor = await FunctionUtils.extractDominantColor(

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:my_flutter_application/utils/MyAppColors.dart';
 import 'package:my_flutter_application/utils/MyAppTextSize.dart';
-import 'package:my_flutter_application/utils/MyAppBoxShadow.dart';
+import '../../../../../StudioProjects/Deliver_Ease/lib/utils/MyAppBoxShadow.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen(Key? key) : super(key: key);

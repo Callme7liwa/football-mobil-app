@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:lorem_ipsum/lorem_ipsum.dart';
 import 'package:my_flutter_application/utils/FunctionsUtils.dart';
-import 'package:my_flutter_application/utils/MyAppBoxShadow.dart';
+import '../../../../../../StudioProjects/Deliver_Ease/lib/utils/MyAppBoxShadow.dart';
 import 'package:my_flutter_application/utils/MyAppColors.dart';
 import 'package:lorem_ipsum/util/words.dart';
 
